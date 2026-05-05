@@ -10,4 +10,4 @@ uvicorn
 langchain-pinecone
 pypdf
 
-#-e .
+-e .

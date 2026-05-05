@@ -2,6 +2,7 @@ from fastapi import FastAPI, UploadFile, File, Request
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 from starlette.responses import JSONResponse
+
 from data_ingestion.ingestion_pipeline import DataIngestion  # you already have this
 from agent.workflow import GraphBuilder  # this should be your graph stream handler
 from data_models.models import *
@@ -24,7 +25,6 @@ async def upload_files(files: List[UploadFile] = File(...)):
         return {"message": "Files successfully processed and stored."}
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
-    
 
 @app.post("/query")
 async def query_chatbot(request: QuestionRequest):
