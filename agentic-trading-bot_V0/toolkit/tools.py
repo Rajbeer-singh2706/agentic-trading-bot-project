@@ -11,6 +11,7 @@ from utils.config_loader import load_config
 from dotenv import load_dotenv
 from pinecone import Pinecone
 load_dotenv()
+
 api_wrapper = PolygonAPIWrapper()
 model_loader=ModelLoader()
 config = load_config()

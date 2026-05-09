@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 from starlette.responses import JSONResponse
 
-from data_ingestion.ingestion_pipeline import DataIngestion  # you already have this
+from src.ingestion.ingestion_pipeline import DataIngestion  # you already have this
 from agent.workflow import GraphBuilder  # this should be your graph stream handler
 from data_models.models import *
 
