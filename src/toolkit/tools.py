@@ -27,7 +27,6 @@ load_dotenv()
 model_loader=ModelLoader()
 config = load_config()
 
-
 @tool(args_schema=RagToolSchema)
 def retriever_tool(question):
     """this is retriever tool"""
@@ -52,7 +51,6 @@ def retriever_tool(question):
     retriever_result = retriever.invoke(question)
     return retriever_result
 
-
 ###### tool2 : Tavily Search ##########
 tavilytool = TavilySearchResults(
     max_results = config['tools']['tavily']['max_results'],
@@ -60,7 +58,6 @@ tavilytool = TavilySearchResults(
     include_answer=True,
     include_raw_content=True
 )
-
 
 ###### tool3 : PolygonFinancials ##########
 api_wrapper = PolygonAPIWrapper()

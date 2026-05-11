@@ -1,11 +1,16 @@
 
+import os 
+import sys 
 
-from fastapi import FastAPI, UploadFile, File , Request 
 
-@app.post("/upload")
-async def upload_files(files: List[UploadFile]):
-    try:
-        ingestion = DataIngestion()
-        ingestion.run_pipeline(files)
-    except Exception as e:
-        return ""
+print(os.path.dirname(__file__))
+# D:\AI_PROJECTS\agentic-trading-bot-project
+
+path = os.path.join(os.path.dirname(__file__), 'src')
+print(f"path : {path}")
+sys.path.insert(0, path)
+
+from main_1 import app 
+
+
+## python main.py
