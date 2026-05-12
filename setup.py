@@ -6,5 +6,5 @@ setup(
     version='0.0.1',
     author_email='test@gmail.com',
     packages=find_packages(),
-    install_requires=['lancedb','langchain','langgraph','tavily-python','polygon']
+    install_requires=['lancedb','langchain','langgraph','tavily-python','polygon','python-dotenv']
 )

@@ -2,12 +2,13 @@ import os
 from dotenv import load_dotenv
 
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_google_genai import ChatGoogleGenerativeAI
-from custmor_support_system.utils.config_loader import load_config
+
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_groq import ChatGroq
 
-from .logger import setup_logger
+from utils.config_loader import load_config
+from utils.mylogger import setup_logger
 
 logger = setup_logger(__name__)
 
@@ -26,7 +27,7 @@ class ModelLoader:
         """
         Validate necessary envrioment Variables
         """
-        required_vars = ["GOOGLE_API_KEY", "GROQ_API_KEY"]
+        required_vars = ["GOOGLE_API_KEY", "GROQ_API_KEY", "HF_TOKEN"]
         self.groq_api_key = os.getenv('GROQ_API_KEY')
         missing_vars = [var for var in required_vars if not os.getenv(var)]
         logger.warning(f"Missing : {missing_vars}")
@@ -44,6 +45,7 @@ class ModelLoader:
            
         #embeddings = GoogleGenerativeAIEmbeddings(model=model_name)
         embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-V2")
+        logger.info(f"embeddings : {embeddings}")
         return embeddings
 
     def load_llm(self):

@@ -14,6 +14,6 @@ def load_config(config_path: str | None = None) -> dict:
 
 if __name__ == '__main__':
     print(load_config())
-    print("nmme")
+    print("name")
 
 #python src/utils/config_loader.py

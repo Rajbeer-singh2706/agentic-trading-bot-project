@@ -50,7 +50,4 @@ with st.sidebar:
 
 
 
-
-
-
-# D:\AI_PROJECTS\agentic-trading-bot-project>streamlit run src/app.py
+# streamlit run src/app.py

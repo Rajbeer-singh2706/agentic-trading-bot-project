@@ -2,7 +2,6 @@
 import os 
 import sys 
 
-
 print(os.path.dirname(__file__))
 # D:\AI_PROJECTS\agentic-trading-bot-project
 
@@ -14,3 +13,6 @@ from main_1 import app
 
 
 ## python main.py
+
+#uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+

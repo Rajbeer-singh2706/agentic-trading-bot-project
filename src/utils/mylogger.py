@@ -4,7 +4,6 @@ import logging
 import os
 from logging.handlers import RotatingFileHandler
 
-
 def setup_logger(
     name: str = __name__,
     log_level: str = None,

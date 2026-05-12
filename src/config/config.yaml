@@ -1,5 +1,5 @@
 vector_db:
-  index_name: "trading_bot"
+  index_name: "tradingbot"
 
 retriever:
   top_K: 3
