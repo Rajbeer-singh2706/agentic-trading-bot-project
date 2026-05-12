@@ -3,13 +3,9 @@ from langgraph.graph import StateGraph, START
 from langgraph.prebuilt.tool_node import ToolNode, tools_condition
 from langchain_core.messages import AIMessage, HumanMessage
 
-
-
 from utils.model_loaders import ModelLoader
 from toolkit.tools import *
 
-class State(TypedDict):
-    messages: Annotated[list, add_messages]
 
 class GraphBuilder:
     def __init__(self):

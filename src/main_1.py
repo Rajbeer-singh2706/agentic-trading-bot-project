@@ -10,6 +10,7 @@ from ingestion.ingestion_pipeline import DataIngestion
 # this should be your graph stream handler
 from agents.workflow import GraphBuilder  
 from utils.mylogger import setup_logger
+from data_models.models import QuestionRequest
 
 logger = setup_logger(__name__)
 
@@ -37,3 +38,30 @@ async def upload_files(files:List[UploadFile] = File(...)):
         return {"message": status}
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
+
+
+@app.post("/query")
+async def query_chatbot(request: QuestionRequest):
+    try:
+        graph_service = GraphBuilder()
+        graph_service.build()
+        
+        ### Get the trading bot graph
+        trading_bot_graph = graph_service.get_graph()
+
+        # Assuming request is a pydantic object like: {"question": "your text"}
+        messages={"messages": [request.question]}
+
+        ## Invoke the Agents
+        result = trading_bot_graph.invoke(messages)
+
+        # If result is dict with messages:
+        if isinstance(result, dict) and "messages" in result:
+            final_output = result["messages"][-1].content  # Last AI response
+        else:
+            final_output = str(result)
+        
+        return {"answer": final_output}
+
+    except Exception as e:
+         return JSONResponse(status_code=500, content={"error": str(e)})

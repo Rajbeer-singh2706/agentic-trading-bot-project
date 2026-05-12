@@ -48,6 +48,37 @@ with st.sidebar:
                 st.warning("Some files were emoty or unreadable.")
 
 
+# Display chat history
+st.header("💬 Chat")
+for chat in st.session_state.messages:
+    if chat["role"] == "user":
+        st.markdown(f"**🧑 You:** {chat['content']}")
+    else:
+        st.markdown(f"**🤖 Bot:** {chat['content']}")
 
+# Chat input box at bottom
+with st.form(key="chat_form", clear_on_submit=True):
+    user_input = st.text_input("Your message", placeholder="e.g. Tell me about NIFTY 50")
+    submit_button = st.form_submit_button("Send")
 
+if submit_button and user_input.strip():
+    try:
+        # Show user message
+        st.session_state.messages.append({"role": "user", "content": user_input})
+
+        # Show thinking spinner while backend processes
+        with st.spinner("Bot is thinking..."):
+            payload = {"question": user_input}
+            response = requests.post(f"{BASE_URL}/query", json=payload)
+
+        if response.status_code == 200:
+            answer = response.json().get("answer", "No answer returned.")
+            st.session_state.messages.append({"role": "bot", "content": answer})
+            st.rerun()  # 🔁 fixed here
+        else:
+            st.error("❌ Bot failed to respond: " + response.text)
+
+    except Exception as e:
+        raise TradingBotException(e, sys)
+    
 # streamlit run src/app.py
