@@ -33,7 +33,7 @@ class JSONFormatter(logging.Formatter):
         if hasattr(record, "user_id"):
             log_data["user_id"] = record.user_id
 
-        if record.extra:
+        if hasattr(record, "extra") and record.extra:
             log_data.update(record.extra)
 
         return json.dumps(log_data)

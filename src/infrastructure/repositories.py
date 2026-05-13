@@ -4,7 +4,7 @@ from typing import List, Optional, Dict, Any
 from datetime import datetime
 import uuid
 
-from domain.entities import Document, SearchResult, ConversationContext
+from domain.entities import Document, SearchResult, Message, ConversationContext
 from domain.repositories import DocumentRepository, ConversationRepository, CacheRepository
 from infrastructure.config import get_config
 from infrastructure.logging import get_logger
@@ -29,6 +29,23 @@ class InMemoryConversationRepository(ConversationRepository):
     async def get_by_session_id(self, session_id: str) -> Optional[ConversationContext]:
         """Retrieve conversation by session ID."""
         return self._conversations.get(session_id)
+
+    async def add_message(self, session_id: str, message: Message) -> None:
+        """Add a message to an existing conversation."""
+        conversation = self._conversations.get(session_id)
+        if conversation is None:
+            raise ValueError(f"Conversation not found: {session_id}")
+        conversation.add_message(message)
+        self._conversations[session_id] = conversation
+        self.logger.debug(f"Added message to conversation: {session_id}")
+
+    async def list_by_user(self, user_id: str) -> List[ConversationContext]:
+        """List conversations belonging to a user."""
+        return [
+            conversation
+            for conversation in self._conversations.values()
+            if conversation.user_id == user_id
+        ]
 
     async def update(self, context: ConversationContext) -> None:
         """Update conversation context."""
