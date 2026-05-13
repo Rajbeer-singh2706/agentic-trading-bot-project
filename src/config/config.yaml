@@ -1,0 +1,33 @@
+vector_db:
+  index_name: "tradingbot"
+
+retriever:
+  top_K: 3
+  score_threshold: 0.5
+
+
+embedding_models:
+  default: "huggingface_embedding"
+  models:
+    google_embedding:
+        provider: "google"
+        model_name: "models/text-embedding-004"
+
+    huggingface_embedding:
+       provider: "huggingface"
+       model_name: "sentence-transformers/all-MiniLM-L6-v2"
+
+llms:
+  default: "groq_llm"
+  models:
+     google_llm:
+        provider: "google"
+        model_name: "deepseek-r1-distill-llama-70b"
+     groq_llm:
+        provider: "groq"
+        model_name: "openai/gpt-oss-120b"
+
+tools:
+  tavily:
+     max_results: 5
+

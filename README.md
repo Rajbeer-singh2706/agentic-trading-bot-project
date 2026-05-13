@@ -2,6 +2,10 @@
 agentic-trading-bot-project
 
 
+#### RUN 
+streamlit run src/app.py
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
 ## 
 uv pip install -e .
 
