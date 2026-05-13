@@ -16,7 +16,7 @@ from pathlib import Path
 # Configuration
 # ============================================================================
 
-API_BASE_URL = "http://localhost:8000"
+API_BASE_URL = "http://localhost:8000/api/v1"
 SESSION_TIMEOUT = 3600  # 1 hour in seconds
 
 # Page configuration
@@ -159,7 +159,7 @@ def render_header():
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col1:
-        st.image("🤖", width=50)
+        st.write("🤖")
     
     with col2:
         st.title("Agentic Trading Bot")
