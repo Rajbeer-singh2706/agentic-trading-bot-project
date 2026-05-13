@@ -112,6 +112,7 @@ class ApplicationContext:
         self.container = get_container()
         self.logger = get_logger(__name__)
         self._services: Dict[str, Service] = {}
+        # Services are now registered in initialize_services() in main.py
 
     def register_service(self, name: str, service: Service) -> None:
         """Register a managed service."""

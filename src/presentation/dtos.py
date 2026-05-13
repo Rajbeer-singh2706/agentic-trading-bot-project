@@ -29,7 +29,6 @@ class QueryRequestDTO(BaseModel):
             }
         }
 
-
 class SearchResultDTO(BaseModel):
     """Data transfer object for search results."""
     document_id: str
@@ -47,7 +46,6 @@ class SearchResultDTO(BaseModel):
                 "metadata": {"source": "wikipedia"},
             }
         }
-
 
 class QueryResponseDTO(BaseModel):
     """Data transfer object for query responses."""
@@ -69,7 +67,6 @@ class QueryResponseDTO(BaseModel):
             }
         }
 
-
 class UploadRequestDTO(BaseModel):
     """Data transfer object for upload requests."""
     session_id: str = Field(...)
@@ -77,7 +74,6 @@ class UploadRequestDTO(BaseModel):
     class Config:
         """Pydantic config."""
         schema_extra = {"example": {"session_id": "session_12345"}}
-
 
 class IngestionResultDTO(BaseModel):
     """Data transfer object for ingestion results."""
@@ -100,7 +96,6 @@ class IngestionResultDTO(BaseModel):
             }
         }
 
-
 class ErrorDTO(BaseModel):
     """Data transfer object for errors."""
     error_code: str
@@ -118,7 +113,6 @@ class ErrorDTO(BaseModel):
                 "timestamp": "2024-01-01T12:00:00",
             }
         }
-
 
 class HealthCheckDTO(BaseModel):
     """Data transfer object for health checks."""

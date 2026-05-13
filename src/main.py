@@ -54,6 +54,9 @@ def create_app() -> FastAPI:
         """Application startup."""
         logger.info("Application startup...")
         try:
+            # Initialize services
+            await initialize_services()
+            
             app_context = get_app_context()
             await app_context.startup()
             logger.info("Application started successfully")
@@ -71,6 +74,26 @@ def create_app() -> FastAPI:
             logger.info("Application shut down successfully")
         except Exception as e:
             logger.error(f"Shutdown error: {e}")
+
+
+async def initialize_services():
+    """Initialize and register application services."""
+    try:
+        container = get_container()
+        
+        # Register repositories
+        from infrastructure.repositories import InMemoryConversationRepository
+        container.register(
+            "conversation_repository",
+            lambda: InMemoryConversationRepository(),
+            singleton=True
+        )
+        
+        logger.info("Services initialized successfully")
+        
+    except Exception as e:
+        logger.error(f"Service initialization failed: {e}")
+        raise
 
     # Include routers
     app.include_router(router)

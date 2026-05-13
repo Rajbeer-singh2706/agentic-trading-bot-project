@@ -37,7 +37,7 @@ format:
 	isort src/ tests/
 
 run:
-	python -m uvicorn src.api.main:app --reload --host 0.0.0.0 --port 8000
+	python -m uvicorn src.main:create_app --reload --host 0.0.0.0 --port 8000
 
 docker-build:
 	docker-compose build
